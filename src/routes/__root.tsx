@@ -107,6 +107,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
+        {/* SVG distortion filter for liquid glass components — must be at document root for url() references to resolve */}
+        <svg style={{ display: "none" }} aria-hidden="true">
+          <filter id="glass-distortion">
+            <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
+          </filter>
+        </svg>
         {children}
         <Scripts />
       </body>

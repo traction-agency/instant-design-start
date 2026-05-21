@@ -15,14 +15,6 @@ function Index() {
         style={{ backgroundImage: `url(${heroBg})`, filter: "saturate(1.4)" }}
       />
       <div className="absolute inset-0 bg-black/20" aria-hidden />
-
-      {/* SVG distortion filter — required once per page for liquid glass */}
-      <svg style={{ display: "none" }} aria-hidden="true">
-        <filter id="glass-distortion">
-          <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
-          <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
-        </filter>
-      </svg>
       <div className="relative z-10 flex max-w-2xl flex-col items-center text-center">
         <h1
           className="text-3xl font-normal leading-tight text-white sm:text-4xl md:text-5xl"
