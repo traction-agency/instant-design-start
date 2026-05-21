@@ -40,7 +40,7 @@ function Index() {
                 fontFamily: '"Lora", serif',
                 color: "#89d15a",
                 textShadow:
-                  "0 0 10px rgba(61,165,90,0.5), 0 0 24px rgba(61,165,90,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
+                  "0 0 10px rgba(137,209,90,0.5), 0 0 24px rgba(137,209,90,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
               }}
             >
               seconds
