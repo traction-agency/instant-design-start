@@ -38,7 +38,7 @@ function Index() {
               className="italic"
               style={{
                 fontFamily: '"Lora", serif',
-                color: "#3da55a",
+                color: "#6bb23c",
                 textShadow:
                   "0 0 10px rgba(61,165,90,0.5), 0 0 24px rgba(61,165,90,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
               }}
