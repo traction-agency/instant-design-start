@@ -11,6 +11,14 @@ function Index() {
       className="relative flex min-h-screen justify-center overflow-hidden bg-cover bg-center px-6 pt-[18vh]"
       style={{ backgroundImage: `url(${heroBg})` }}
     >
+      {/* SVG distortion filter — required once per page for liquid glass */}
+      <svg style={{ display: "none" }} aria-hidden="true">
+        <filter id="glass-distortion">
+          <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
+        </filter>
+      </svg>
+
       <div className="absolute inset-0 bg-black/20" aria-hidden />
       <div className="relative z-10 flex max-w-2xl flex-col items-center text-center">
         <h1
@@ -29,7 +37,7 @@ function Index() {
                 fontFamily: '"Lora", serif',
                 color: "#6fd089",
                 textShadow:
-                  "0 0 10px rgba(111,208,137,0.5), 0 0 24px rgba(111,208,137,0.3)",
+                  "0 0 10px rgba(111,208,137,0.5), 0 0 24px rgba(111,208,137,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
               }}
             >
               seconds
@@ -65,22 +73,82 @@ function Index() {
 function GlassButton({ children }: { children: React.ReactNode }) {
   return (
     <button
-      className="group relative overflow-hidden rounded-[8px] border border-white/25 bg-white/10 px-5 py-2 text-xs font-medium text-white backdrop-blur-xl transition-all hover:bg-white/20 hover:border-white/40"
-      style={{
-        fontFamily: '"Sora", sans-serif',
-        boxShadow:
-          "inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(255,255,255,0.08), 0 8px 32px rgba(0,0,0,0.25)",
-      }}
+      style={
+        {
+          "--bg-color": "rgba(255, 255, 255, 0.08)",
+          "--highlight": "rgba(255, 255, 255, 0.35)",
+          position: "relative",
+          display: "inline-block",
+          padding: "10px 22px",
+          borderRadius: "50px",
+          cursor: "pointer",
+          overflow: "hidden",
+          background: "transparent",
+          border: "none",
+          outline: "none",
+          transition: "transform 0.2s ease",
+          mixBlendMode: "difference",
+        } as React.CSSProperties
+      }
+      onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1.05)")}
+      onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1)")}
+      onMouseDown={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(0.95)")}
+      onMouseUp={(e) => ((e.currentTarget as HTMLElement).style.transform = "scale(1.05)")}
     >
-      <span className="relative z-10">{children}</span>
-      <span
+      {/* Layer 1 — backdrop distortion */}
+      <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 rounded-[10px] opacity-60"
         style={{
-          background:
-            "linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.15) 100%)",
+          position: "absolute",
+          inset: 0,
+          borderRadius: "inherit",
+          pointerEvents: "none",
+          zIndex: 1,
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+          filter: "url(#glass-distortion) saturate(120%) brightness(1.15)",
         }}
       />
+      {/* Layer 2 — translucent tinted overlay + border */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "inherit",
+          pointerEvents: "none",
+          zIndex: 2,
+          background: "var(--bg-color)",
+          border: "1px solid rgba(255, 255, 255, 0.12)",
+        }}
+      />
+      {/* Layer 3 — specular highlight */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "inherit",
+          pointerEvents: "none",
+          zIndex: 3,
+          boxShadow: "inset 1px 1px 1px var(--highlight)",
+        }}
+      />
+      {/* Layer 4 — content */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 4,
+          color: "#ffffff",
+          fontFamily: '"Sora", sans-serif',
+          fontWeight: 500,
+          fontSize: "0.75rem",
+          letterSpacing: "0.01em",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {children}
+      </div>
     </button>
   );
 }
