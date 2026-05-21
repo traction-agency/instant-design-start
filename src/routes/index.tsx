@@ -59,7 +59,7 @@ function Index() {
           </span>
         </h1>
         <p
-          className="mt-4 max-w-md text-sm text-lightgrey/85"
+          className="mt-4 max-w-md text-sm text-white/85"
           style={{ fontFamily: '"Sora", sans-serif', fontWeight: 300 }}
         >
           Receive the first design within just a few days. No proposals or contracts required.
