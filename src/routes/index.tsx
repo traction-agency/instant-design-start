@@ -7,10 +7,15 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main
-      className="relative flex min-h-screen justify-center overflow-hidden bg-cover bg-center px-6 pt-[18vh]"
-      style={{ backgroundImage: `url(${heroBg})` }}
-    >
+    <main className="relative flex min-h-screen justify-center overflow-hidden px-6 pt-[18vh]">
+      {/* Background image with increased saturation */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBg})`, filter: "saturate(1.4)" }}
+      />
+      <div className="absolute inset-0 bg-black/20" aria-hidden />
+
       {/* SVG distortion filter — required once per page for liquid glass */}
       <svg style={{ display: "none" }} aria-hidden="true">
         <filter id="glass-distortion">
@@ -18,8 +23,6 @@ function Index() {
           <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
         </filter>
       </svg>
-
-      <div className="absolute inset-0 bg-black/20" aria-hidden />
       <div className="relative z-10 flex max-w-2xl flex-col items-center text-center">
         <h1
           className="text-3xl font-normal leading-tight text-white sm:text-4xl md:text-5xl"
@@ -35,9 +38,9 @@ function Index() {
               className="italic"
               style={{
                 fontFamily: '"Lora", serif',
-                color: "#6fd089",
+                color: "#3da55a",
                 textShadow:
-                  "0 0 10px rgba(111,208,137,0.5), 0 0 24px rgba(111,208,137,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
+                  "0 0 10px rgba(61,165,90,0.5), 0 0 24px rgba(61,165,90,0.3), 0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
               }}
             >
               seconds
