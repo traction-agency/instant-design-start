@@ -15,7 +15,11 @@ function Index() {
       <div className="relative z-10 flex max-w-2xl flex-col items-center text-center">
         <h1
           className="text-3xl font-normal leading-tight text-white sm:text-4xl md:text-5xl"
-          style={{ fontFamily: '"Lora", serif' }}
+          style={{
+            fontFamily: '"Lora", serif',
+            textShadow:
+              "0 0 12px rgba(255,255,255,0.55), 0 0 28px rgba(255,255,255,0.3)",
+          }}
         >
           Get started in{" "}
           <span className="relative inline-block">
